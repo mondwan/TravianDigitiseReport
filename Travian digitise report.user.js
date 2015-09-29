@@ -5,8 +5,11 @@
 // @author       Mond Wan
 // @include      http://*.travian.*/berichte.php*
 // @grant        none
-// @run-at document-end
+// @run-at       document-end
 // @version      1
+// @updateURL    https://github.com/mondwan/TravianDigitiseReport/raw/master/Travian%20digitise%20report.user.js
+// @downloadURL  https://github.com/mondwan/TravianDigitiseReport/raw/master/Travian%20digitise%20report.user.js
+// @homepage     https://github.com/mondwan/TravianDigitiseReport
 // ==/UserScript==
 
 (function () {
