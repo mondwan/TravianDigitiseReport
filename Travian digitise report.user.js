@@ -6,7 +6,7 @@
 // @include      http://*.travian.*/berichte.php*
 // @grant        none
 // @run-at       document-end
-// @version      1
+// @version      2
 // @updateURL    https://github.com/mondwan/TravianDigitiseReport/raw/master/Travian%20digitise%20report.user.js
 // @downloadURL  https://github.com/mondwan/TravianDigitiseReport/raw/master/Travian%20digitise%20report.user.js
 // @homepage     https://github.com/mondwan/TravianDigitiseReport
