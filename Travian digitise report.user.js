@@ -6,7 +6,7 @@
 // @include      http://*.travian.*/berichte.php*
 // @grant        none
 // @run-at       document-end
-// @version      2
+// @version      2.1
 // @updateURL    https://github.com/mondwan/TravianDigitiseReport/raw/master/Travian%20digitise%20report.user.js
 // @downloadURL  https://github.com/mondwan/TravianDigitiseReport/raw/master/Travian%20digitise%20report.user.js
 // @homepage     https://github.com/mondwan/TravianDigitiseReport
@@ -24,11 +24,13 @@
         var actualLoad = parseInt(tokens[0], 10);
         var maxLoad = parseInt(tokens[1], 10);
         var load = actualLoad / maxLoad * 100;
+        
+        // Round to 2 decimal digits
+        load = load.toFixed(2);
 
         // An element carray load rate
         var report = document.createElement('span');
-        load = load.toFixed(2);
-        report.innerText = load + '%';
+        report.textContent = load + '%';
 
         // Render that element in DOM
         var container = bag.parentElement;
