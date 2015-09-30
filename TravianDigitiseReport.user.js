@@ -4,15 +4,45 @@
 // @description  Digitalize resources directly on the page
 // @author       Mond Wan
 // @include      http://*.travian.*/berichte.php*
+// @include      http://*.travian.*/position_details.php*
 // @grant        none
 // @run-at       document-end
-// @version      2.2
+// @version      2.3
 // @updateURL    https://github.com/mondwan/TravianDigitiseReport/raw/master/TravianDigitiseReport.user.js
 // @downloadURL  https://github.com/mondwan/TravianDigitiseReport/raw/master/TravianDigitiseReport.user.js
 // @homepage     https://github.com/mondwan/TravianDigitiseReport
 // ==/UserScript==
 
 (function () {
+    var PATHNAME = document.location.pathname.split('/')[1];
+
+    function digitiseLoading (actualLoad, maxLoad, loadRate) {
+        var ret;
+
+        if (PATHNAME === 'berichte.php') {
+            ret = document.createElement('span');
+            ret.textContent = loadRate + '%';
+        } else if (PATHNAME === 'position_details.php') {
+            ret = document.createElement('p');
+            ret.textContent = actualLoad + ':' + loadRate +'%';
+            ret.style.cssFloat = 'right';
+            ret.style.marginRight = '55px';
+        }
+
+        return ret;
+    };
+
+    function renderReport (bag, report) {
+        var container;
+        if (PATHNAME === 'berichte.php') {
+            container = bag.parentElement;
+        } else if (PATHNAME === 'position_details.php') {
+            container = bag.parentElement;
+            container.removeChild(bag);
+        }
+        container.appendChild(report);
+    };
+
     // Get all elements with report info
     var bags = document.getElements('img.reportInfo.carry');
 
@@ -26,18 +56,14 @@
 
         if (isFinite(actualLoad) && isFinite(maxLoad)) {
             // Calculate load rate
-            var load = actualLoad / maxLoad * 100;
+            var loadRate = actualLoad / maxLoad * 100;
 
             // Round to 2 decimal digits
-            load = load.toFixed(2);
+            loadRate = loadRate.toFixed(2);
 
-            // An element carray load rate
-            var report = document.createElement('span');
-            report.textContent = load + '%';
+            var report = digitiseLoading(actualLoad, maxLoad, loadRate);
 
-            // Render that element in DOM
-            var container = bag.parentElement;
-            container.appendChild(report);
+            renderReport(bag, report);
         }
     });
 })();
